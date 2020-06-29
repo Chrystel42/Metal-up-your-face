@@ -1010,60 +1010,52 @@ router.get('/ListFriends/:id', function (req, res, next) {
   ssn = req.session
 
   if (ssn.prenom) {
-    if (ssn.Id == req.params.id) {
-      Amis = []
+    Amis = []
 
-      User.findOne({
-        '_id': ssn.Id
-      }, {
-        'friends.id': 1
-      }, function (err, result) {
+    User.findOne({
+      '_id': req.params.id
+    }, {
+      'friends.id': 1
+    }, function (err, result) {
 
-        if (result.friends) {
-          var amis = result.friends
+      if (result && result.friends) {
+        var amis = result.friends
 
-          function ami() {
+        function ami() {
 
-            var result = []
-            for (i = 0; i < amis.length; i++) {
-              element = amis[i].id
+          var result = []
+          for (i = 0; i < amis.length; i++) {
+            element = amis[i].id
 
-              result.push(element)
-
-            }
-            return result
-
+            result.push(element)
 
           }
+          return result
 
-          var tableau = ami();
-          console.log("tableau")
-          console.log(tableau)
-          User.find({
-            '_id': tableau
-          }, {
-            '_id': 1,
-            'prenom': 1,
-            'cheminfichier': 1
-          }, function (err, user) {
 
-            res.render('ListFriends', {
-              'user': ssn,
-              'Amis': user
-            })
-          })
-        } else {
-          req.toastr.info('Pas d\'amis')
-          res.redirect('/home')
         }
 
+        var tableau = ami();
+        console.log("tableau")
+        console.log(tableau)
+        User.find({
+          '_id': tableau
+        }, {
+          '_id': 1,
+          'prenom': 1,
+          'cheminfichier': 1
+        }, function (err, user) {
 
-
-
-      })
-    }
-
-
+          res.render('ListFriends', {
+            'user': ssn,
+            'Amis': user
+          })
+        })
+      } else {
+        req.toastr.info('Pas d\'amis')
+        res.redirect('/home')
+      }
+    })
   }
 })
 //Route permettant de supprimer un ami de sa liste d'amis
