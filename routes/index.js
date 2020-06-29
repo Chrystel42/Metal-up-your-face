@@ -38,7 +38,7 @@ router.post('/', function (req, res, next) {
 
 
   //On récupère l'email et le mot de passe saisi par l'utilisateur
-  email = req.body.email
+  email = req.body.mail
   password = req.body.password
 
 
