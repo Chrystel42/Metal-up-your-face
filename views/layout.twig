@@ -108,13 +108,14 @@
    
   
     socket.on('amisOnline', function(data){
-      console.log("data"+data)
+    
       var user ={
         'id': data.id,
         'username': data.username,
         'socketid': data.socketId
       }
-      $('.amis-totaux').html("<a class='online' onclick='fenetre(\""+user.id+"\", \""+user.username+"\", \""+user.socketid+"\")' >"+user.username+"</p>")
+        console.log("data"+user)
+      $('.entete-liste text-left').html("<a class='online' onclick='fenetre(\""+user.id+"\", \""+user.username+"\", \""+user.socketid+"\")' >"+user.username+"</p>")
     })
     socket.on('amisOutLine', function(data){
       console.log('hors ligne'+ data)

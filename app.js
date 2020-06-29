@@ -83,7 +83,7 @@ io.on("connection", (socket) => {
         result = [];
         //console.log(` ${a[property1].id}`);
         for (property2 in UsersOnline) {
-          if (` ${UsersOnline[property2].ID}` == ` ${a[property1].id}`) {
+          if (` ${UsersOnline[property2].ID}` == ` ${a[property1].id}` && ` ${UsersOnline[property2].ID}` != user.ID) {
             friend = {
               id: ` ${UsersOnline[property2].ID}`,
               username: ` ${UsersOnline[property2].name}`,
@@ -96,6 +96,7 @@ io.on("connection", (socket) => {
       }
     }
     amis = ami();
+    console.log("amis" + amis)
     socket.broadcast.emit("amisOnline", amis);
 
     Post.find({}, {
