@@ -1,0 +1,21 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+<h1>Réinitialisation du mot de passe</h1>
+
+<p>Bonjour {{user['username']}}</p>
+<form method="POST">
+                      
+                        <div id="password">
+                            <input type="password" name="password" placeholder="Votre nouveau mot de passe">
+                        </div>
+                        <div id="confPassword">
+                            <input type="password" name="confPassword" placeholder="confirmer votre nouveau mot de passe">
+                        </div>
+                         <button type="submit" class="btn btn-primary">Se connecter</button>
+
+                    </form>
+
+
+
+{% endblock %}

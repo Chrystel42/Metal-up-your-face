@@ -1,0 +1,22 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+    {% if data %}
+        {% for data in data %}
+            <div class="user">
+                <image src="{{ data.cheminfichier}}" class="avatar">
+                <p>{{ data.prenom}} {{ data.nom }}</p>
+                
+            
+                <a href="/addFriends/{{data._id}}"><button class="btn btn-primary">Ajouter</button>
+            
+            </div>
+
+
+        {% endfor %}
+    {% else %}
+        <h1>Pas d'amis correspondant à la recherche</h1>
+    {% endif %}
+
+
+{% endblock %}

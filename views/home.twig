@@ -1,0 +1,125 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row justify-content-around mt-3">
+            <div class="col-lg-3 p-0 mb-2">
+
+
+                <!-- amis connectés -->
+                <div class="active-friends card bg-dark text-white text-center mt-2 mb-2">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Amis</h5>
+                    </div>
+                    <div class="card-body bg-light text-dark m-2">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-7 bg-dark p-0">
+                
+                    <section>
+                        <div class="card bg-dark text-white text-center">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">WALL OF DEATH</h5>
+                            </div>
+                            <div class="post-area card-body bg-light text-dark m-2">
+
+                                <form id="svg_f1" method="post" action="/addPost" enctype="multipart/form-data">
+                                    <div id="cont2" style="width:100%;height:70%;">
+                                    <div id="dash2" style="margin:5px;height:80%;overflow:hidden;background-color: white">
+                                    <div class="form-group mb-0">
+                                        <textarea class="form-control" name="post" id="post2" rows="4"
+                                            placeholder="Quoi de neuf ?" maxlength="150" required wrap sentences></textarea>
+                                        <p id="text"></p>
+                                        <input type="file" id="attachement2" name="attachement" id="file" style="opacity:0;position:relative;height:100%;z-index:1" />
+                                        <div id="te2"></div>
+                                                        <div id="tt2"></div>
+                                        
+                                        <input class="btn bgc btn-sm mt-2 d-block envoyer-btn" type="submit"
+                                            value="Envoyez">
+                                    </div>
+                                </form>
+                                <!-- section pour envoyer des photos, etc -->
+
+
+                            </div>
+                            <div class="card-body bg-light text-dark m-2">
+                                
+                                <!-- Posts du profil -->
+                                {% for poste in posts %}
+                                    <div class="card-body bg-light text-dark m-1">
+                                        
+                                        <section>
+                                            <div class="post">
+                                                <div class="info">
+                                               
+                                                    <img src="{{ poste.authorAvatar}}" class="imgProfil">
+                                                    <a href="/profil/{{ poste['authorId']}}">{{ poste["author"] }}</a>
+                                                    {% if poste['authorId'] == user['Id']%}
+                                                        <a href="/DelPost/{{ poste['_id']}}/profil"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="contentPost">
+                                                    <p>{{poste["content"]}}</p>
+                                                    {% if poste['extension'] == 'Image' %}
+                                                        <img {{ poste["cheminfichier"]}}" class="imgpost"> 
+                                                    {% endif %}
+                                                    {% if poste['link'] != 'https://undefined' %}
+                                                        <iframe type="text/html" class ="video" name="link" style=" width:230px; height:180px;" src=" {{ poste["link"]}}" frameborder="0" allowfullscreen></iframe>
+                                                    {% endif %} 
+                                                </div>
+                                                <div class="time">
+                                                    <p>le {{ poste["date"]}} à {{poste['hour']}} heures {{ poste['minutes']}}</p>
+                                                </div>
+                                                <div class="commentView">
+                                                    {% for comment in poste['comments'] %}
+                                                        <div class="com">
+                                                            <div class="info">
+                                                                <img src="{{ comment.imgAuth}}" class="imgProfil">
+                                                                <p>{{ comment.author}}</p><br>
+                                                                {% if comment.UserId == user['_id']%}
+                                                                    <a href="/DelCom/{{ comment._id}}/{{ poste['_id']}}/profil"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                                                {% endif %}
+                                                            </div>
+                                                            <div class="contentPost">
+                                                                <p>{{comment["content"]}}</p>
+                                                                {% if comment['extension']  %}
+                                                                    <img src="{{ comment["cheminfichier"]}}" class="imgpost">                        
+                                                                {% elseif comment['link'] %}
+                                                                    <iframe type="text/html" class ="video" name="link" style=" width:230px; height:180px;" src=" {{ comment["link"]}}" frameborder="0" allowfullscreen></iframe>
+                                                                {% endif %} 
+                                                            </div>
+                                                            <div class="commentTime">
+                                                                <p>le {{ comment["date"]}} à {{comment['hour']}} heures {{ comment['minutes']}}</p>
+
+                                                            </div>
+                                                        </div>  
+                                                    {% endfor %}
+                                                </div>
+                                                <form id="svg_f1" method="post" action="/addComment/{{poste['_id']}}" enctype="multipart/form-data">
+                                                    <div id="cont2" style="width:100%;height:70%;">
+                                                        <div id="dash2" style="margin:5px;height:80%;overflow:hidden;background-color: white">
+                                                            <textarea name="post"  class="form-control" id="post2" placeholder="commentaire" rows="4" maxlength="150" required wrap sentences></textarea>
+                                                            <p id="text"></p>
+                                                            <input type="file" id="attachement2" name="attachement2" id="file" style="opacity:0;position:relative;height:100%;z-index:1" />
+                                                            <div id="te2"></div>
+                                                            <div id="tt2"></div>
+                                                        </div>
+                                                    </div>
+                                                    <input class="btn bgc btn-sm mt-2 d-block envoyer-btn" type="submit"
+                                                value="Commentez">
+                                                </form>
+                                            </div>
+                                        </section>
+                                    </div>
+                                {% endfor %}
+                                
+                            </div>
+                        </div>
+                    </section>
+                
+            </div>
+        </div>
+    </div>
+{% endblock %}

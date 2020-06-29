@@ -1,0 +1,57 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+<div id="updateUser">
+    <form method="post" action="/user/update/{{pers._id}}" enctype="multipart/form-data">
+   
+        {% if pers.prenom != "" %}
+            <input type="text" name="prenom" placeholder="{{pers.prenom}}">
+        {% endif %}
+        {% if pers.nom != "" %}
+            <input type="text" name="nom" placeholder="{{pers.nom}}">
+        {% endif %}
+        {% if pers.email != "" %}
+            <input type="text" name="email" placeholder="{{pers.email}}">
+        {% endif %}
+        {% if pers.ville != "" %}
+            <input type="text" name="ville" placeholder="{{pers.ville}}">
+        {% endif %}
+        {% if pers.pays != "" %}
+            <input type="text" name="pays" placeholder="{{pers.pays}}">
+        {% endif %}
+       
+        {% if pers.statut %}
+            <p>En ligne</p>
+        {% else %}
+            <p>Hors ligne</p>
+        {% endif %}
+        {% if pers.cheminfichier != "" %}
+
+            <img class="imgProfil" src="{{pers.cheminfichier}}">
+        {% endif %}
+        {% if pers.Typedemetal != "" %}
+            <input type="text" name="Typedemetal" placeholder="{{pers.Groupes}}">
+            {% else %}
+            <input type="text" name="Typedemetal" placeholder="Vos groupes Métal préférée">
+        {% endif %}
+        {% if pers.Groupes != "" %}
+            <input type="text" name="Groupes" placeholder="{{pers.Groupes}}">
+            {% else %}
+            <input type="text" name="Groupes" placeholder="Vos groupes Métal préférée">
+        {% endif %}
+            
+
+
+        <input type="submit" value="envoyer">
+
+    </form>
+    </div>
+    {% endblock %}
+
+
+
+
+
+
+
+

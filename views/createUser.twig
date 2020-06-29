@@ -1,0 +1,53 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+    <h1>{{title}}</h1>
+    <form method="POST">*
+    <div class="create">
+    <table>
+        <tbody>
+            <tr>
+                <td><label for="user">Prénom et Nom de l'utilisateur</label></td>
+                <td><input type="text" name="user" ></td>
+            <tr>
+            <tr>
+                <td><label for="email">Email de l'utilisateur</label></td>
+                <td><input type="email" name="email"></td>
+            </tr>
+            <tr>
+                <td><label for="password">Mot de passe</label></td>
+                <td><input type="password" name="password"></td>
+            </tr>
+            <tr>
+                 <td><label for="confpassword">Confirmation du mot de passe</label></td>
+                 <td><input type="password" name="confpassword"></td>
+            </tr>
+            <tr>
+                <td><label for="site">Site d'affectation</label></td>
+                <td><SELECT name="site" size="1">
+                    {% for site in sites %}
+                    <OPTION>{{site}}
+                    {% endfor %}
+                    </SELECT></td>
+            </tr>
+            <tr>
+                <td><label for="statut">Statut de l'utilisateur</label></td>
+                <td> <SELECT name="statut" size="1">
+                    {% for statut in status %}
+                        <OPTION>{{statut}}
+                        {% endfor %}
+                </SELECT></td>
+
+            </tr>
+            <tr>
+                <td><input type="submit" value="Créer"></td>
+            </tr>
+        </tbody>
+                
+    </table>
+    </div>
+        
+
+    </form>
+
+{% endblock %}

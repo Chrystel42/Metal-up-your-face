@@ -1,0 +1,274 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+   
+    <div class="container">
+        <div class="row justify-content-around mt-3">
+            <div class="col-sm-3 p-0 mb-2">
+                <div class="card bg-dark text-white text-center photo-profile">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Metal Head</h5>
+                    </div>
+                    <div class="card-body bg-light text-dark m-2 p-0">
+                        <img class="card-img img-responsive rounded-0" src="{{us[0]['cheminfichier'] }}" alt="photo de profil" style="max-width: 300px;max-height:300px;" />
+                        {% if identite != user.Id %}
+                        <button class="message-to btn rounded-0 btn-primary m-0 btn-block purple" type="submit">
+                            Envoyez un Message
+                        </button>
+                        {% endif %}
+                       
+                    </div>
+                </div>
+
+                <!-- amis connectés -->
+                <div class="active-friends card bg-dark text-white text-center mt-2 mb-2">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">En Ligne</h5>
+                    </div>
+                    <div class="card-body bg-light text-dark m-2">
+                        <div class="entete-liste text-left">
+                            <span class="amis-totaux">Amis</span>
+                            <span>{{ us[0]['prenom'] }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Infos Profile -->
+            <div class="col-sm-7 bg-dark">
+                <section class="row">
+                    <div class="card bg-dark text-white text-center">
+                        <div class="card-header">
+                            <div class="row col-sm-12 justify-content-between p-0 m-0">
+                                <h5 class="card-title text-left mb-0 d-block">
+                                
+                                
+                                    {{ us[0]['prenom'] }} {{ us[0]['nom'] }}
+                                
+                                
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="card-body bg-light text-dark m-2">
+                            <div class="container-fluid">
+                                <div class="row justify-content-between">
+                                    <div class="col-lg-12 px-0 text-left">
+                                        <h5 class="a-propos pb-3 violet">A PROPOS \m/</h5>
+                                        <dl class="row">
+                                            <dt class="col-sm-4">Age :</dt>
+                                            <dd class="col-sm-8">{{date}} ans</dd>
+
+                                            <dt class="col-sm-4">Sexe :</dt>
+                                            <dd class="col-sm-8">{{ us[0]['genre'] }}</dd>
+
+                                            <dt class="col-sm-4">Ville :</dt>
+                                            <dd class="col-sm-8">{{ us[0]['ville'] }}</dd>
+
+                                            <dt class="col-sm-4">Pays :</dt>
+                                            <dd class="col-sm-8">{{ us[0]['pays'] }}</dd>
+
+                                            <dt class="col-sm-4">Email :</dt>
+                                            <dd class="col-sm-8">{{ us[0]['email'] }}</dd>
+
+                                            <dt class="col-sm-4">Type de metal :</dt>
+                                            <dd class="col-sm-8">ICI</dd>
+
+                                            <dt class="col-sm-4">Groupes :</dt>
+                                            <dd class="col-sm-8">
+                                                ICI
+                                            </dd>
+                                        </dl>
+                                        {% if  us[0]['_id'] == user.Id %}
+                                        <div class="d-flex justify-content-end mt-3">
+                                            <a class="galerie-bouton btn btn-primary d-block purple text-white" onclick="open('/admin/viewUser/{{us[0]['_id']}}', 'Mise à jours profil','scrollbars=1,resizable=1,height=560,width=770')"  role="button" target="_blank">Editer</a>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!---------------------------liste AMIS--------------------------->
+                        <div class="card-body bg-light text-dark m-2">
+                            <h5 class="text-left border-bottom">Liste d'amis</h5>
+
+
+                            <div class="d-flex justify-content-end">
+                                <a class=" btn btn-primary d-block purple" href="#" role="button">Voir
+                                    tout</a>
+                            </div>
+                        </div>
+                        <!-- Posts du profil -->
+                        <div class="card-body bg-light text-dark m-2 ">
+                            <!-- Posts du profil -->
+                            <h5 class="text-left border-bottom">Les Posts</h5>
+                            {% for poste in postes %}
+                                <div class="card-body bg-light text-dark m-1 p-0">
+                                    
+                                    <section>
+                                    
+                                        <div class="post">
+                                            
+                                            <div class="info container p-0">
+                                                <img src="{{ poste.authorAvatar}}" alt="photo avatar"class="imgProfil d-block float-left ">
+                                                <a href="/profil/{{ poste['authorId']}}" class="float-left pl-3 mt-3 mb-3" style="color:#7d14a9;font-weight:bold;">{{ poste["author"] }}</a>
+                                                
+                                            </div>
+                                            <div class="contentPost mt-3">
+                                                <p>{{poste["content"]}} 
+                                                {% if poste['authorId'] == user['Id']%}
+                                                    <a href="/DelPost/{{ poste['_id']}}/profil" title="Supprimer ce Post" class="float-left pr-2"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                                {% endif %}
+                                                
+                                                </p>
+                                                {% if poste['extension'] == 'Image' %}
+                                                    <img src="{{ poste["cheminfichier"]}}" class="imgpost"> 
+                                                {% endif %}
+                                                {% if poste['link'] != 'https://undefined' %}
+                                                    <iframe type="text/html" class ="video" name="link" style=" width:230px; height:180px;" src=" {{ poste["link"]}}" frameborder="0" allowfullscreen></iframe>
+                                                {% endif %} 
+                                            </div>
+                                            <div class="time text-muted text-left mb-2">
+                                                <small>le {{ poste["date"]}} à {{poste['hour']}} heures {{ poste['minutes']}}</small>
+                                            </div>
+                                            <div class="commentView">
+                                                {% for comment in poste['comments'] %}
+                                                    <div class="com">
+                                                        <div class="info">
+                                                            <img src="{{ comment.imgAuth}}" class="imgProfil">
+                                                            <p>{{ comment.author}}</p><br>
+                                                            {% if comment.UserId == user['_id']%}
+                                                                <a href="/DelCom/{{ comment._id}}/{{ poste['_id']}}/profil"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="contentPost">
+                                                            <p>{{comment["content"]}}</p>
+                                                            {% if comment['extension']  %}
+                                                                <img src="{{ comment["cheminfichier"]}}" class="imgpost">                        
+                                                            {% elseif comment['link'] %}
+                                                                <iframe type="text/html" class ="video" name="link" style=" width:230px; height:180px;" src=" {{ comment["link"]}}" frameborder="0" allowfullscreen></iframe>
+                                                            {% endif %} 
+                                                        </div>
+                                                        <div class="commentTime">
+                                                            <p>le {{ comment["date"]}} à {{comment['hour']}} heures {{ comment['minutes']}}</p>
+
+                                                        </div>
+                                                    </div>  
+                                                {% endfor %}
+                                            </div>
+                                            <form id="svg_f1" method="post" action="/addComment/{{poste['_id']}}" enctype="multipart/form-data" class="border-bottom">
+                                                <div id="cont2" style="width:100%;height:70%;">
+                                                    <div id="dash2" style="margin:5px;height:80%;overflow:hidden;background-color: white">
+                                                        <textarea name="post"  class="form-control" id="post2" placeholder="commentaire" rows="4" maxlength="150" required wrap sentences></textarea>
+                                                        <p id="text"></p>
+                                                        <div class="col-md-12" style="background-color:#7D14A9; height: 40px; border-radius: .25rem;">
+                                                            <p class="text-white pt-2 pb-2" style="position: absolute; text-align: center;">Glisser vos fichiers ici</p>
+                                                            <input type="file" id="attachement2" name="attachement2" id="file" style="opacity:0;position:relative;height:100%;z-index:1" class="mt-0" />
+                                                        </div>
+                                                        <div id="te2"></div>
+                                                        <div id="tt2"></div>
+                                                    </div>
+                                                </div>
+                                                <input class="btn btn-primary btn-sm mt-2 d-block envoyer-btn" type="submit"
+                                            value="Commentez">
+                                            </form>
+                                        </div>
+                                    </section>
+                                    
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+                                
+                              
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+                        
+                            <!-- Posts du profil
+                            {% for poste in postes %}
+                                <div class="card-body bg-light text-dark m-1">
+                                    
+                                    <section>
+                                        <div class="post">
+                                            <div class="info">
+                                                <img src="{{ poste.authorAvatar}}" class="imgProfil">
+                                                <a href="/profil/{{ poste['authorId']}}">{{ poste["author"] }}</a>
+                                                {% if poste['authorId'] == user['Id']%}
+                                                    <a href="/DelPost/{{ poste['_id']}}/profil"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                                {% endif %}
+                                            </div>
+                                            <div class="contentPost">
+                                                <p>{{poste["content"]}}</p>
+                                                {% if poste['extension'] == 'Image' %}
+                                                    <img src="{{ poste["cheminfichier"]}}" class="imgpost"> 
+                                                {% endif %}
+                                                {% if poste['link'] != 'https://undefined' %}
+                                                    <iframe type="text/html" class ="video" name="link" style=" width:230px; height:180px;" src=" {{ poste["link"]}}" frameborder="0" allowfullscreen></iframe>
+                                                {% endif %} 
+                                            </div>
+                                            <div class="time">
+                                                <p>le {{ poste["date"]}} à {{poste['hour']}} heures {{ poste['minutes']}}</p>
+                                            </div>
+                                            <div class="commentView">
+                                                {% for comment in poste['comments'] %}
+                                                    <div class="com">
+                                                        <div class="info">
+                                                            <img src="{{ comment.imgAuth}}" class="imgProfil">
+                                                            <p>{{ comment.author}}</p><br>
+                                                            {% if comment.UserId == user['_id']%}
+                                                                <a href="/DelCom/{{ comment._id}}/{{ poste['_id']}}/profil"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="contentPost">
+                                                            <p>{{comment["content"]}}</p>
+                                                            {% if comment['extension']  %}
+                                                                <img src="{{ comment["cheminfichier"]}}" class="imgpost">                        
+                                                            {% elseif comment['link'] %}
+                                                                <iframe type="text/html" class ="video" name="link" style=" width:230px; height:180px;" src=" {{ comment["link"]}}" frameborder="0" allowfullscreen></iframe>
+                                                            {% endif %} 
+                                                        </div>
+                                                        <div class="commentTime">
+                                                            <p>le {{ comment["date"]}} à {{comment['hour']}} heures {{ comment['minutes']}}</p>
+
+                                                        </div>
+                                                    </div>  
+                                                {% endfor %}
+                                            </div>
+                                            <form id="svg_f1" method="post" action="/addComment/{{poste['_id']}}" enctype="multipart/form-data">
+                                                <div id="cont2" style="width:100%;height:70%;">
+                                                    <div id="dash2" style="margin:5px;height:80%;overflow:hidden;background-color: white">
+                                                        <textarea name="post"  class="form-control" id="post2" placeholder="commentaire" rows="4" maxlength="150" required wrap sentences></textarea>
+                                                        <p id="text"></p>
+                                                        <input type="file" id="attachement2" name="attachement2" id="file" style="opacity:0;position:relative;height:100%;z-index:1" />
+                                                        <div id="te2"></div>
+                                                        <div id="tt2"></div>
+                                                    </div>
+                                                </div>
+                                                <input class="btn btn-primary btn-sm mt-2 d-block envoyer-btn" type="submit"
+                                            value="Commentez">
+                                            </form>
+                                        </div>
+                                    </section>
+                                    
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>-->
+
+    
+  
+
+
+{% endblock %}

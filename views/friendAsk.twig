@@ -1,0 +1,22 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+
+{% for ami in Amis %}
+    <div class="ami">
+        <p>{{ ami['prenom']}} {{ami['nom']}}</p>
+        <img class="imgProfil" src="{{ami['cheminfichier']}}">
+        
+        <a href="/refuseNotif/{{ ami['_id'] }}">Refuser</a>
+        <a href="/acceptNotif/{{ ami['_id'] }}">Accepter</a>
+
+    </div>
+
+
+
+
+{% endfor %}
+
+
+
+{% endblock %}

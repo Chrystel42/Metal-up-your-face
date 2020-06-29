@@ -1,0 +1,47 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+
+<div class="container">
+
+    <div id="main">
+        
+        {% for Ami in Amis %}
+            
+            <div class="listFriend">
+            
+                <img {{ Ami.cheminfichier}}" class="avatar">
+                <a href="/profil/{{Ami['_id']}}">{{ Ami['prenom']}}</a>
+                <a href="/delFriends/{{Ami['_id']}}"><i class="fa fa-times fa-3x" aria-hidden="true"></i></a>
+
+
+            </div>
+
+
+        {% endfor %}
+
+    </div>
+    <div id="side2">
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+{% endblock %}

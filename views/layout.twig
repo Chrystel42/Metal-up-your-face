@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="/stylesheets/style.css"/>
+  <link rel="stylesheet" href="/stylesheets/style-custom.css" />
+  <!-- favicon -->
+  <link rel="shortcut icon" type="image/x-icon" src="/images/icon-logo.png" />
+
+  <title>Metal Up - Bienvenue !</title>
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="icon" type="image/gif" href="animated_favicon1.gif">
+</head>
+
+  <body>
+     <!-- HEADER -->
+{% if user %}
+    <nav class="navbar navbar-dark bg-dark justify-content-between sticky-top">
+        <!-- Navbar content -->
+        <a class="navbar-brand" href="/home"><img src="/images/icon-logo.png" style="height: 40px;"
+                class="pl-4 pt-1 overflow-hidden" /></a>
+        <!-- Nouveaux messages -->
+        <div class="btn btn-secondary m-1">
+            Messages
+            <span class="badge badge-light pl-1">22</span>
+        </div>
+        <!-- Nouveaux amis -->
+        <div class="btn btn-secondary m-1">
+            <a href="/friendAsk">Nouveaux Potes</a>
+            <span class="badge badge-light pl-1" name="NbrePotes">0</span>
+        </div>
+        <div class="btn btn-secondary m-1">
+            Notifications
+            <span class="badge badge-light pl-1">0</span>
+        </div>
+        
+        <!-- Paramètres -->
+        <a href="/profil/{{user.Id}}"><img src="/images/eng.png" alt="paramètres" style="height: 40px;" /></a>
+        <!-- Administration -->
+        {% if user.role == "administrateur" %}
+          <a href="/admin">Administration</a>
+        {% endif %}
+        <!-- Recherches -->
+         <form class="form-inline" method="post" action="/searchFriends">
+            <input class="form-control mr-sm-2" name="friends" type="search" placeholder="Recherche" aria-label="Recherche" />
+            <button class="btn btn-outline my-2 my-sm-0 text-white" type="submit" style="background-color: #7d14a9;">Go !</button> 
+        </form>
+        <a href="/user/logout"><i class="fa fa-power-off fa-2x" aria-hidden="true"></i></a>
+    </nav>
+    {% endif %}
+   {% block body %}
+
+   {% endblock %}
+
+    
+    
+    
+      
+     
+            
+
+    <footer class="bg-dark p-1 mt-1 text-muted text-right fixed-bottom">
+            <span class="font-weight-bold">2020 © METAL UP</span> ...
+            <span class="font-italic">your face</span>
+        </footer>
+    
+  
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/css/toastr.min.css">
+<!--<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>-->
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js"></script>
+
+
+
+{{ toasts }}
+
+
+
+  
+           
+           <script type="text/javascript" src="/javascripts/script.js"/></script>
+           <script type="text/javascript" src="/javascripts/preview.js"/></script>
+           <script type="text/javascript" src="/javascripts/chat.js"/></script>
+           
+            
+        <script src="/socket.io/socket.io.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script>
+
+    $(function() {
+      
+    var socket = io()
+    var date = Date()
+    console.log(date)
+   
+  
+    socket.on('amisOnline', function(data){
+      console.log("data"+data)
+      var user ={
+        'id': data.id,
+        'username': data.username,
+        'socketid': data.socketId
+      }
+      $('.amis-totaux').html("<a class='online' onclick='fenetre(\""+user.id+"\", \""+user.username+"\", \""+user.socketid+"\")' >"+user.username+"</p>")
+    })
+    socket.on('amisOutLine', function(data){
+      console.log('hors ligne'+ data)
+    })
+
+
+    socket.on('nbreFriendsAsking', function(data){
+      console.log(data)
+     
+      $('span[name=NbrePotes]').text(data)
+      
+    })
+
+    <!-- Affichage du nombre de posts en page d'accueil -->
+    socket.on('nbreDoc', function(data){
+      $('#nbrePost').text('Nombre de posts '+data)
+      
+    });
+    <!-- Affichage du nombre de users en page d'accueil -->
+    socket.on('nbreUserOnline', function(data){
+      $('#nbreUsers').text("Nombre d'utilisateurs inscrit "+data)
+    });
+    socket.on('PostOnLine', function(data){
+      console.log(data)
+    })
+    })
+
+
+    </script>
+           
+  </body>
+
+</html>

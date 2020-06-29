@@ -1,0 +1,86 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+<div class="news">
+    <h2>Posts</h2>
+    <table id="posts">
+   <tr>
+       <th>auteur</th>
+       <th>date</th>
+       <th>heure</th>
+       <th>actions</th>
+       
+   </tr>
+{% for post in posts %}
+   <tr>
+       <td>{{post.author}}</td>
+       <td>{{post.date}}</td>
+       <td>{{post.hour}}:{{post.minutes}}</td>
+       <td><a href="/admin/deletePost/{{post._id}}" ><i class="fa fa-trash"></i></a><a href="/admin/ViewPost/{{post._id}}"><i class="fa fa-sticky-note"></i></a></td>
+        <td><a href="/admin/comment/{{post._id}}">
+   </tr>
+      
+{% endfor %}
+</table>
+<h2>Utilisateurs</h2>
+    <table id="users">
+   <tr>
+       <th>prenom</th>
+       <th>nom</th>
+       <th>statut</th>
+        <th>email</th>
+       <th>role</th>
+       <th>action<th>
+   </tr>
+{% for user in users %}
+   <tr>
+       <td>{{user.prenom}}</td>
+       <td>{{user.nom}}</td>
+       {% if user.statut%}
+       <td>en ligne</td>
+       {% else %}
+       <td>Hors ligne</td>
+       {% endif %}
+       <td>{{user.email}}</td>
+       <td>{{user.role}}</td>
+       <td><a id="{{user._id}}" onclick="checkUser(this.id)" ><i class="fa fa-trash"></i></a><a id="{{user._id}}" onclick="ViewUser(this.id)"><i class="fa fa-sticky-note"></i></a></td>
+       
+      
+   </tr>
+   {% endfor %}
+
+   
+
+  
+</table>
+
+</div>
+
+<script>
+function checkUser(id){
+
+if ( confirm( "Vous voulez vraiment supprimer cet utilisateur?" ) ) {
+     document.location.href="/admin/deleteUser/"+id+""; 
+} else {
+    alert("utilisateur non supprimé")
+    
+}
+ 
+}
+function ViewUser(id){
+
+if ( confirm( "Vous voulez voir cet utilisateur?" ) ) {
+    windowUser = window.open(
+        "/admin/viewUser/"+id+"",
+        "Mise à jour de l'utilisateur",
+        "resizable,scrollbars,status"
+    ) 
+     
+} else {
+    alert("utilisateur non vu")
+    
+}
+ 
+}
+</script>
+{% endblock %}
