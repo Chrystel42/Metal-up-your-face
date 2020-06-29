@@ -179,8 +179,14 @@ app.use(function (err, req, res, next) {
 });
 console.log(Date());
 
-server.listen(process.env.PORT || 8000, function () {
-  console.log("serveur à l'écoute sur 80");
-});
+console.log("Starting..........");
+try {
+  server.listen(process.env.PORT || 80, function () {
+    console.log("serveur à l'écoute sur 80");
+  });
+} catch (error) {
+  console.log(error);
+}
+
 
 module.exports = server;
