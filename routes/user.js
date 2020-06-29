@@ -87,10 +87,10 @@ router.post('/createCount', function (req, res, next) {
 
         if (Fields['0'].password == Fields['0'].Confpassword) {
 
-          if (Fields['0'].email == "chrystel.alinc@gmail.com" || "jury.metalup@gmail.com") {
-            role = "Administrateur"
+          if (Fields['0'].email == "chrystel.alinc@gmail.com" || Fields['0'].email == "jury.metalup@gmail.com") {
+            role = "administrateur"
           } else {
-            role = "User"
+            role = "user"
           }
 
           /*if(Files['upload'].size >'0'){
@@ -104,12 +104,13 @@ router.post('/createCount', function (req, res, next) {
           var datePrint = day + "-" + month + "-" + year;
 
           var temp_path = Files['0']['upload']['path'];
-          
+
           var file_name = Files['0']['upload']['name'].toString().split('.')[0];
           var picture_link;
           var userData;
           console.log(Files['0']['upload']['name'])
           console.log(file_name)
+
           function res_promise() {
             return new Promise((resolve, reject) => {
               cloudinary.uploader.upload(
@@ -145,34 +146,34 @@ router.post('/createCount', function (req, res, next) {
               date: datePrint,
               dateFull: today
             }
-            
+
             User.create(userData, function (err, user) {
-                  var ip = req.headers.origin
-                  var mail = {
-                    from: "metal.up.yf@gmail.com",
-                    to: Fields['0'].email,
-                    subject: "votre mot de passe sur le réseau social",
-                    html: '<h1 style="color: red">Création de compte sur le réseau</h1>' +
-  
-                      '<p> Votre compte vient d\'être créé sur le réseau. Pour vous connecter, cliquez sur le liens suivants pour activer votre compte: ' + ip + '/user/validateCount/' + user.id + '</p>' +
-  
-                      '<b> Have fun</b><br>'
-  
-                  }
-                  smtpTrans.sendMail(mail, function (error, response) {
-                    if (error) {
-                      throw error
-                    }
-                    console.log("success email")
-                    smtpTrans.close();
-                    req.toastr.success('Félicitation un email vient de vous être envoyé. Merci de cliquer sur le lien pour activer votre compte')
-                    res.redirect('/')
-  
-  
-  
-                  })
+              var ip = req.headers.origin
+              var mail = {
+                from: "metal.up.yf@gmail.com",
+                to: Fields['0'].email,
+                subject: "votre mot de passe sur le réseau social",
+                html: '<h1 style="color: red">Création de compte sur le réseau</h1>' +
+
+                  '<p> Votre compte vient d\'être créé sur le réseau. Pour vous connecter, cliquez sur le liens suivants pour activer votre compte: ' + ip + '/user/validateCount/' + user.id + '</p>' +
+
+                  '<b> Have fun</b><br>'
+
+              }
+              smtpTrans.sendMail(mail, function (error, response) {
+                if (error) {
+                  throw error
+                }
+                console.log("success email")
+                smtpTrans.close();
+                req.toastr.success('Félicitation un email vient de vous être envoyé. Merci de cliquer sur le lien pour activer votre compte')
+                res.redirect('/')
+
+
+
               })
             })
+          })
 
 
           //return 
