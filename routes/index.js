@@ -60,7 +60,7 @@ router.post('/', function (req, res, next) {
           if (result) {
 
 
-            if (email == "chrystel.alinc@gmail.com" || email == "jury.metalup@gmail.com") {
+            if (email === "chrystel.alinc@gmail.com" || email === "jury.metalup@gmail.com") {
               role = "administrateur"
             } else {
               role = "user"
