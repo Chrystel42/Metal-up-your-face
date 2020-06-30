@@ -70,29 +70,29 @@
                                                         <iframe type="text/html" class ="video" name="link" style=" width:230px; height:180px;" src=" {{ poste["link"]}}" frameborder="0" allowfullscreen></iframe>
                                                     {% endif %} 
                                                 </div>
-                                                <div class="time">
-                                                    <p>le {{ poste["date"]}} à {{poste['hour']}} heures {{ poste['minutes']}}</p>
+                                                <div class="time text-muted text-right mb-2">
+                                                    <small>le {{ poste["date"]}} à {{poste['hour']}} heures {{ poste['minutes']}}</small>
                                                 </div>
                                                 <div class="commentView">
                                                     {% for comment in poste['comments'] %}
-                                                        <div class="com">
+                                                        <div class="com border mt-1">
                                                             <div class="info">
-                                                                <img src="{{ comment.imgAuth}}" class="imgProfil">
-                                                                <p>{{ comment.author}}</p><br>
+                                                                <img src="{{ comment.imgAuth}}" class="imgProfil mt-2 ml-2 d-block float-left">
+                                                                <p class="float-left pl-2 mt-3 mb-3">{{ comment.author}}</p><br>
                                                                 {% if comment.UserId == user['_id']%}
-                                                                    <a href="/DelCom/{{ comment._id}}/{{ poste['_id']}}/profil"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                                                    <a href="/DelCom/{{ comment._id}}/{{ poste['_id']}}/profil"><i class="fa fa-times float-left pl-2 mt-3 mb-3" aria-hidden="true"></i></a>
                                                                 {% endif %}
                                                             </div>
-                                                            <div class="contentPost">
-                                                                <p>{{comment["content"]}}</p>
+                                                            <div class="contentPost mb-2">
+                                                                <p class="mt-2 mb-1 ml-2">{{comment["content"]}}</p>
                                                                 {% if comment['extension']  %}
                                                                     <img src="{{ comment["cheminfichier"]}}" class="imgpost">                        
                                                                 {% elseif comment['link'] %}
                                                                     <iframe type="text/html" class ="video" name="link" style=" width:230px; height:180px;" src=" {{ comment["link"]}}" frameborder="0" allowfullscreen></iframe>
                                                                 {% endif %} 
                                                             </div>
-                                                            <div class="commentTime">
-                                                                <p>le {{ comment["date"]}} à {{comment['hour']}} heures {{ comment['minutes']}}</p>
+                                                            <div class="commentTime text-right mr-1 mb-1">
+                                                                <small>le {{ comment["date"]}} à {{comment['hour']}} heures {{ comment['minutes']}}</small>
 
                                                             </div>
                                                         </div>  
@@ -108,7 +108,7 @@
                                                             <div id="tt2"></div>
                                                         </div>
                                                     </div>
-                                                    <input class="btn bgc btn-sm mt-2 d-block envoyer-btn" type="submit"
+                                                    <input class="btn btn-dark btn-sm mt-2 d-block mx-auto envoyer-btn" type="submit"
                                                 value="Commentez">
                                                 </form>
                                             </div>
