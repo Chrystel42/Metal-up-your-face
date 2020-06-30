@@ -134,8 +134,8 @@
                                             </div>
                                             <div class="commentView">
                                                 {% for comment in poste['comments'] %}
-                                                    <div class="com border">
-                                                        <div class="info">
+                                                    <div class="com border mt-1">
+                                                        <div class="info mt-2">
                                                             <img src="{{ comment.imgAuth}}" class="imgProfil">
                                                             <p>{{ comment.author}}</p><br>
                                                             {% if comment.UserId == user['_id']%}
@@ -200,7 +200,7 @@
                                     <section>
                                         <div class="post">
                                             <div class="info">
-                                                <img src="{{ poste.authorAvatar}}" class="imgProfil">
+                                                <img src="{{ poste.authorAvatar}}" class="imgProfil d-block mt-1 ml-1 float-left">
                                                 <a href="/profil/{{ poste['authorId']}}">{{ poste["author"] }}</a>
                                                 {% if poste['authorId'] == user['Id']%}
                                                     <a href="/DelPost/{{ poste['_id']}}/profil"><i class="fa fa-times" aria-hidden="true"></i></a>
