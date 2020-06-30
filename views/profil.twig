@@ -53,7 +53,7 @@
                             <div class="container-fluid">
                                 <div class="row justify-content-between">
                                     <div class="col-lg-12 px-0 text-left">
-                                        <h5 class="a-propos mb-3 border-bottom">À PROPOS</h5>
+                                        <h5 class="a-propos mb-3 border-bottom">À Propos</h5>
                                         <dl class="row">
                                             <dt class="col-sm-4">Age :</dt>
                                             <dd class="col-sm-8">{{date}} ans</dd>
@@ -135,14 +135,14 @@
                                             <div class="commentView">
                                                 {% for comment in poste['comments'] %}
                                                     <div class="com border mt-1">
-                                                        <div class="info mt-1">
-                                                            <img src="{{ comment.imgAuth}}" class="imgProfil mt-1 ml-1 d-block float-left">
+                                                        <div class="info">
+                                                            <img src="{{ comment.imgAuth}}" class="imgProfil mt-2 ml-2 d-block float-left">
                                                             <p class="float-left pl-2 mt-3 mb-3">{{ comment.author}}</p><br>
                                                             {% if comment.UserId == user['_id']%}
                                                                 <a href="/DelCom/{{ comment._id}}/{{ poste['_id']}}/profil"><i class="fa fa-times float-left pl-2 mt-3 mb-3" aria-hidden="true"></i></a>
                                                             {% endif %}
                                                         </div>
-                                                        <div class="contentPost">
+                                                        <div class="contentPost mb-2">
                                                             <p class="mt-2 mb-1 ml-2">{{comment["content"]}}</p>
                                                             {% if comment['extension']  %}
                                                                 <img src="{{ comment["cheminfichier"]}}" class="imgpost">                        
@@ -151,7 +151,7 @@
                                                             {% endif %} 
                                                         </div>
                                                         <div class="commentTime text-right mr-1 mb-1">
-                                                            <p>le {{ comment["date"]}} à {{comment['hour']}} heures {{ comment['minutes']}}</p>
+                                                            <small>le {{ comment["date"]}} à {{comment['hour']}} heures {{ comment['minutes']}}</small>
 
                                                         </div>
                                                     </div>  
