@@ -10,7 +10,7 @@
                         <h5 class="card-title mb-0">Metal Head</h5>
                     </div>
                     <div class="card-body bg-light text-dark m-2 p-0">
-                        <img class="card-img img-responsive rounded-0" src="{{us[0]['cheminfichier'] }}" alt="photo de profil" style="max-width: 300px;max-height:300px;" />
+                        <img class="card-img img-responsive rounded-0" src="{{us[0]['cheminfichier'] }}" alt="photo de profil" style="object-fit: cover;max-width: 300px;max-height:300px;" />
                         {% if identite != user.Id %}
                         <button class="message-to btn rounded-0 btn-warning m-0 btn-block purple" type="submit">
                             Envoyez un Message
@@ -53,7 +53,7 @@
                             <div class="container-fluid">
                                 <div class="row justify-content-between">
                                     <div class="col-lg-12 px-0 text-left">
-                                        <h5 class="a-propos pb-3 violet">A PROPOS \m/</h5>
+                                        <h5 class="a-propos mb-3 border-bottom">À PROPOS</h5>
                                         <dl class="row">
                                             <dt class="col-sm-4">Age :</dt>
                                             <dd class="col-sm-8">{{date}} ans</dd>
@@ -71,11 +71,11 @@
                                             <dd class="col-sm-8">{{ us[0]['email'] }}</dd>
 
                                             <dt class="col-sm-4">Type de metal :</dt>
-                                            <dd class="col-sm-8">ICI</dd>
+                                            <dd class="col-sm-8">Heavy Metal, Death Metal</dd>
 
                                             <dt class="col-sm-4">Groupes :</dt>
                                             <dd class="col-sm-8">
-                                                ICI
+                                                BE'Lalork, Korn, Accept, Behemoth
                                             </dd>
                                         </dl>
                                         {% if  us[0]['_id'] == user.Id %}
@@ -112,10 +112,10 @@
                                             
                                             <div class="info container p-0">
                                                 <img src="{{ poste.authorAvatar}}" alt="photo avatar"class="imgProfil d-block float-left ">
-                                                <a href="/profil/{{ poste['authorId']}}" class="float-left pl-3 mt-3 mb-3" style="color:#7d14a9;font-weight:bold;">{{ poste["author"] }}</a>
+                                                <a href="/profil/{{ poste['authorId']}}" class="float-left pl-2 mt-3 mb-3" style="color:#7d14a9;font-weight:bold;">{{ poste["author"] }}</a>
                                                 
                                             </div>
-                                            <div class="contentPost mt-3">
+                                            <div class="contentPost mt-2" style="font-size:0.9375rem;">
                                                 <p>{{poste["content"]}} 
                                                 {% if poste['authorId'] == user['Id']%}
                                                     <a href="/DelPost/{{ poste['_id']}}/profil" title="Supprimer ce Post" class="float-left pr-2"><i class="fa fa-times" aria-hidden="true"></i></a>
@@ -129,7 +129,7 @@
                                                     <iframe type="text/html" class ="video" name="link" style=" width:230px; height:180px;" src=" {{ poste["link"]}}" frameborder="0" allowfullscreen></iframe>
                                                 {% endif %} 
                                             </div>
-                                            <div class="time text-muted text-left mb-2">
+                                            <div class="time text-muted text-right mb-2">
                                                 <small>le {{ poste["date"]}} à {{poste['hour']}} heures {{ poste['minutes']}}</small>
                                             </div>
                                             <div class="commentView">
@@ -170,7 +170,7 @@
                                                         <div id="tt2"></div>
                                                     </div>
                                                 </div>
-                                                <input class="btn btn-primary btn-sm mt-2 d-block envoyer-btn" type="submit"
+                                                <input class="btn btn-primary btn-sm mt-2 d-block mx-auto envoyer-btn" type="submit"
                                             value="Commentez">
                                             </form>
                                         </div>
