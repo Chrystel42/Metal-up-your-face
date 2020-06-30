@@ -135,29 +135,29 @@
                                             <div class="commentView">
                                                 {% for comment in poste['comments'] %}
                                                     <div class="com border mt-1">
-                                                        <div class="info mt-2">
-                                                            <img src="{{ comment.imgAuth}}" class="imgProfil">
-                                                            <p>{{ comment.author}}</p><br>
+                                                        <div class="info mt-1">
+                                                            <img src="{{ comment.imgAuth}}" class="imgProfil mt-1 ml-1 d-block float-left">
+                                                            <p class="float-left pl-2 mt-3 mb-3">{{ comment.author}}</p><br>
                                                             {% if comment.UserId == user['_id']%}
-                                                                <a href="/DelCom/{{ comment._id}}/{{ poste['_id']}}/profil"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                                                <a href="/DelCom/{{ comment._id}}/{{ poste['_id']}}/profil"><i class="fa fa-times float-left pl-2 mt-3 mb-3" aria-hidden="true"></i></a>
                                                             {% endif %}
                                                         </div>
                                                         <div class="contentPost">
-                                                            <p>{{comment["content"]}}</p>
+                                                            <p class="mt-2 mb-1 ml-2">{{comment["content"]}}</p>
                                                             {% if comment['extension']  %}
                                                                 <img src="{{ comment["cheminfichier"]}}" class="imgpost">                        
                                                             {% elseif comment['link'] %}
                                                                 <iframe type="text/html" class ="video" name="link" style=" width:230px; height:180px;" src=" {{ comment["link"]}}" frameborder="0" allowfullscreen></iframe>
                                                             {% endif %} 
                                                         </div>
-                                                        <div class="commentTime">
+                                                        <div class="commentTime text-right mr-1 mb-1">
                                                             <p>le {{ comment["date"]}} à {{comment['hour']}} heures {{ comment['minutes']}}</p>
 
                                                         </div>
                                                     </div>  
                                                 {% endfor %}
                                             </div>
-                                            <form id="svg_f1" method="post" action="/addComment/{{poste['_id']}}" enctype="multipart/form-data" class="border-bottom">
+                                            <form id="svg_f1" method="post" action="/addComment/{{poste['_id']}}" enctype="multipart/form-data" class="pb-2 border-bottom">
                                                 <div id="cont2" style="width:100%;height:70%;">
                                                     <div id="dash2" style="margin:5px;height:80%;overflow:hidden;background-color: white">
                                                         <textarea name="post"  class="form-control" id="post2" placeholder="commentaire" rows="4" maxlength="150" required wrap sentences></textarea>
@@ -221,7 +221,7 @@
                                             <div class="commentView">
                                                 {% for comment in poste['comments'] %}
                                                     <div class="com">
-                                                        <div class="info">
+                                                        <div class="info ">
                                                             <img src="{{ comment.imgAuth}}" class="imgProfil">
                                                             <p>{{ comment.author}}</p><br>
                                                             {% if comment.UserId == user['_id']%}
