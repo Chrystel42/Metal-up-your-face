@@ -1,6 +1,7 @@
 {% extends 'layout.twig' %}
 
 {% block body %}
+<p>{{ pers }}</p>
 <div id="updateUser">
     <form method="post" action="/user/update/{{pers._id}}">
         <div class="container bg-dark rounded mt-4">
