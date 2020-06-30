@@ -25,11 +25,11 @@
     <nav class="navbar navbar-dark bg-dark justify-content-between sticky-top">
         <!-- Navbar content -->
         <a class="navbar-brand" href="/home"><img src="/images/icon-logo.png" style="height: 40px;"
-                class="pl-4 pt-1 overflow-hidden" /></a>
+                class="pl-4 pt-1 overflow-hidden" title="Home"/></a>
         <!-- Nouveaux messages -->
         <div class="btn btn-secondary m-1">
             Messages
-            <span class="badge badge-light pl-1">22</span>
+            <span class="badge badge-light pl-1">0</span>
         </div>
         <!-- Nouveaux amis -->
         <div class="btn btn-secondary m-1">
@@ -42,7 +42,7 @@
         </div>
         
         <!-- Paramètres -->
-        <a href="/profil/{{user.Id}}"><img src="/images/eng.png" alt="paramètres" style="height: 40px;" /></a>
+        <a href="/profil/{{user.Id}}"><img src="/images/eng.png" alt="paramètres" style="height: 40px;" title="Mon profil" /></a>
         <!-- Administration -->
         {% if user.role == "administrateur" %}
           <a href="/admin">Administration</a>
@@ -52,7 +52,7 @@
             <input class="form-control mr-sm-2" name="friends" type="search" placeholder="Recherche" aria-label="Recherche" />
             <button class="btn btn-outline my-2 my-sm-0 text-white" type="submit" style="background-color: #7d14a9;">Go !</button> 
         </form>
-        <a href="/user/logout"><i class="fa fa-power-off fa-2x mr-1" aria-hidden="true"></i></a>
+        <a href="/user/logout"><i class="fa fa-power-off fa-2x mr-1" aria-hidden="true" title="Se déconnecter"></i></a>
     </nav>
     {% endif %}
    {% block body %}
