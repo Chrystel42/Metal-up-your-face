@@ -8,11 +8,11 @@
         
         {% for Ami in Amis %}
             
-            <div class="listFriend">
+            <div class="listFriend bg-light rounded">
             
                 <img {{ Ami.cheminfichier}}" class="avatar">
-                <a href="/profil/{{Ami['_id']}}">{{ Ami['prenom']}}</a>
-                <a href="/delFriends/{{Ami['_id']}}"><i class="fa fa-times fa-3x" aria-hidden="true"></i></a>
+                <a href="/profil/{{Ami['_id']}}" class="violet font-weight-bold">{{ Ami['prenom']}}</a>
+                <a href="/delFriends/{{Ami['_id']}}"><i class="fa fa-times fa-2x violet" aria-hidden="true"></i></a>
 
 
             </div>
