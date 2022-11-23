@@ -42,7 +42,7 @@
     "peer": "^0.5.3",
     "push.js": "^1.0.9",
     "racer": "^0.9.3",
-    "socket.io": "^2.3.0",
+    "socket.io": "^2.5.0",
     "socket.io-client": "^2.2.0",
     "toastr": "^2.1.4",
     "twig": "~0.10.3",
